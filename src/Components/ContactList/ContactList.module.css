@@ -1,0 +1,36 @@
+/* .phoneNumber{
+    margin-left: 15px;
+} */
+
+.list{
+    list-style: none;
+    padding: 0;
+}
+
+.itemDesc{
+    text-decoration: underline;
+    display: inline-block;
+}
+.itemValue {
+    font-style: italic;
+    margin: 0px;
+    display: inline-block;
+    margin-left: 15px;
+    padding: 5px 10px;
+    background-color: orange;
+    border-radius: 3px;
+}
+
+
+.btn{
+border-radius: 3px;
+    margin-left: 30px;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: greenyellow;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: orange;
+}
