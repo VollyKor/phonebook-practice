@@ -9,10 +9,10 @@ import Filter from './Components/Filter/Filter';
 // uuidv4();
 
 const testContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', phoneNumber: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', phoneNumber: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', phoneNumber: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', phoneNumber: '227-91-26' },
+  // { id: 'id-1', name: 'Rosie Simpson', phoneNumber: '459-12-56' },
+  // { id: 'id-2', name: 'Hermione Kline', phoneNumber: '443-89-12' },
+  // { id: 'id-3', name: 'Eden Clements', phoneNumber: '645-17-79' },
+  // { id: 'id-4', name: 'Annie Copeland', phoneNumber: '227-91-26' },
 ];
 
 class App extends Component {
@@ -20,6 +20,26 @@ class App extends Component {
     contacts: [...testContacts],
     filter: '',
   };
+
+  componentDidMount() {
+    const contactList = JSON.stringify(this.state.contacts);
+    if (localStorage.getItem('contacts') === null) {
+      localStorage.setItem('contacts', contactList);
+      return;
+    }
+    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+    // console.log(savedContacts);
+    this.setState({ contacts: [...savedContacts] });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+
+    if (contacts !== prevState.contacts) {
+      const contactList = JSON.stringify(contacts);
+      localStorage.setItem('contacts', contactList);
+    }
+  }
 
   addContact = newContact => {
     const { contacts } = this.state;
