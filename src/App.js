@@ -1,5 +1,5 @@
 import './App.module.css';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './Components/Form/Form';
 import ContactList from './Components/ContactList/ContactList';
 import Filter from './Components/Filter/Filter';
@@ -9,40 +9,30 @@ import Filter from './Components/Filter/Filter';
 // uuidv4();
 
 const testContacts = [
-  // { id: 'id-1', name: 'Rosie Simpson', phoneNumber: '459-12-56' },
-  // { id: 'id-2', name: 'Hermione Kline', phoneNumber: '443-89-12' },
-  // { id: 'id-3', name: 'Eden Clements', phoneNumber: '645-17-79' },
-  // { id: 'id-4', name: 'Annie Copeland', phoneNumber: '227-91-26' },
+  { id: 'id-1', name: 'Rosie Simpson', phoneNumber: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', phoneNumber: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', phoneNumber: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', phoneNumber: '227-91-26' },
 ];
 
-class App extends Component {
-  state = {
-    contacts: [...testContacts],
-    filter: '',
-  };
+function App() {
+  const [contacts, setContacts] = useState(() => [...testContacts]);
+  const [filterQuery, setFilter] = useState('');
 
-  componentDidMount() {
-    const contactList = JSON.stringify(this.state.contacts);
-    if (localStorage.getItem('contacts') === null) {
-      localStorage.setItem('contacts', contactList);
-      return;
+  // get items from ls on first render
+  useEffect(() => {
+    if (localStorage.getItem('contacts') !== null) {
+      const data = JSON.parse(localStorage.getItem('contacts'));
+      setContacts(data);
     }
-    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
-    // console.log(savedContacts);
-    this.setState({ contacts: [...savedContacts] });
-  }
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    const { contacts } = this.state;
+  // add items to ls
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
-    if (contacts !== prevState.contacts) {
-      const contactList = JSON.stringify(contacts);
-      localStorage.setItem('contacts', contactList);
-    }
-  }
-
-  addContact = newContact => {
-    const { contacts } = this.state;
+  const addContact = newContact => {
     if (
       contacts.some(({ name }) => {
         return name.includes(newContact.name);
@@ -51,42 +41,35 @@ class App extends Component {
       alert(`${newContact.name} is already in contacts`);
       return;
     }
-    this.setState({ contacts: [...this.state.contacts, newContact] });
+    setContacts(prevState => [...prevState, newContact]);
   };
 
-  filterValue = value => {
-    this.setState({ filter: value });
-  };
-
-  visibleContacts = () => {
-    const { filter, contacts } = this.state;
-    const filtered = filter.toLowerCase();
+  const visibleContacts = () => {
+    const filtered = filterQuery.toLowerCase();
     const filteredArr = contacts.filter(({ name }) =>
       name.toLowerCase().includes(filtered),
     );
     return filteredArr;
   };
 
-  removeContact = idToRemove => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(({ id }) => id !== idToRemove),
-    }));
+  const removeContact = idToRemove => {
+    console.log('remove Contact');
+    const newContactsArray = contacts.filter(({ id }) => id !== idToRemove);
+    setContacts(newContactsArray);
   };
 
-  render() {
-    return (
-      <main className="container">
-        <h1>Phone Book</h1>
-        <Form onSubmit={this.addContact} />
-        <h2>Contact List</h2>
-        <Filter data={this.state} setFilter={this.filterValue} />
-        <ContactList
-          ContactList={this.visibleContacts()}
-          removeContact={this.removeContact}
-        />
-      </main>
-    );
-  }
+  return (
+    <main className="container">
+      <h1>Phone Book</h1>
+      <Form onSubmit={addContact} />
+      <h2>Contact List</h2>
+      <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
+      <ContactList
+        ContactList={visibleContacts()}
+        removeContact={removeContact}
+      />
+    </main>
+  );
 }
 
 export default App;

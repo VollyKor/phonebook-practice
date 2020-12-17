@@ -1,28 +1,22 @@
 import s from './Filter.module.css';
-import React, { Component } from 'react';
 
-export default class Filter extends Component {
-  handleFilter = e => {
-    const { setFilter } = this.props;
+export default function Filter({ setFilter, data: { filter } }) {
+  const handleFilter = e => {
     setFilter(e.target.value);
   };
-
-  render() {
-    const { filter } = this.props.data;
-    return (
-      <div className="filter">
-        <label className={s.label}>
-          <span>Filter </span>
-          <input
-            type="text"
-            className={s.input}
-            value={filter}
-            onChange={this.handleFilter}
-          />
-        </label>
-      </div>
-    );
-  }
+  return (
+    <div className="filter">
+      <label className={s.label}>
+        <span>Filter </span>
+        <input
+          type="text"
+          className={s.input}
+          value={filter}
+          onChange={handleFilter}
+        />
+      </label>
+    </div>
+  );
 }
 // перебор
 // если содержит алерт и стоп
