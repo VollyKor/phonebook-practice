@@ -1,10 +1,11 @@
 import s from './Form.module.css';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
+import PhoneInput from 'react-phone-number-input/input';
 export default function Form({ onSubmit }) {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [value, setValue] = useState('');
 
   const handleChange = ({ target: { dataset, value } }) => {
     switch (dataset.id) {
@@ -38,26 +39,56 @@ export default function Form({ onSubmit }) {
   }
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
+    <form className={s.form} onSubmit={handleSubmit} autoComplete="off">
       <label className={s.label}>
-        <span>Name</span>
+        <span>Имя</span>
         <input
           type="text"
           className={s.input}
           value={name}
           onChange={handleChange}
-          data-id="name"
+          data-id="first-name"
+        />
+      </label>
+      <label className={s.label}>
+        <span>Фамилия</span>
+        <input
+          type="text"
+          className={s.input}
+          value={name}
+          onChange={handleChange}
+          data-id="second-name"
+        />
+      </label>
+      <label className={s.label}>
+        <span>E-mail</span>
+        <input
+          type="email"
+          className={s.input}
+          value={name}
+          onChange={handleChange}
+          data-id="email"
         />
       </label>
       <label className={s.label}>
         <span>Phone number</span>
-        <input
-          type="text"
-          className={s.input}
-          value={phoneNumber}
-          onChange={handleChange}
+        <PhoneInput
+          placeholder="Phone number"
+          // className={s.input}
+          country="UA"
+          international
+          initialValueFormat="national"
+          value={value}
+          onChange={setValue}
           data-id="phoneNumber"
         />
+      </label>
+      <label>
+        <span style={{ display: 'block' }}>Избранные</span>
+        <select name="isChosen">
+          <option value="true">Да</option>
+          <option value="false">Нет</option>
+        </select>
       </label>
       <button type="submit" className={s.btn}>
         Add contact

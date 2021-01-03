@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Form from './Components/Form/Form';
 import ContactList from './Components/ContactList/ContactList';
 import Filter from './Components/Filter/Filter';
+import NavBar from './Components/NavBar/NavBar';
+import { Switch, Route } from 'react-router-dom';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';
@@ -59,16 +61,25 @@ function App() {
   };
 
   return (
-    <main className="container">
-      <h1>Phone Book</h1>
-      <Form onSubmit={addContact} />
-      <h2>Contact List</h2>
-      <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
-      <ContactList
-        ContactList={visibleContacts()}
-        removeContact={removeContact}
-      />
-    </main>
+    <>
+      <NavBar />
+      <main className="container">
+        <Switch>
+          <Route path="/phonebook">
+            <h1>Phone Book</h1>
+            <Form onSubmit={addContact} />
+            <h2>Contact List</h2>
+            <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
+            <ContactList
+              ContactList={visibleContacts()}
+              removeContact={removeContact}
+            />
+          </Route>
+          <Route path="/notes">notes</Route>
+          <Route path="/" exact />
+        </Switch>
+      </main>
+    </>
   );
 }
 
