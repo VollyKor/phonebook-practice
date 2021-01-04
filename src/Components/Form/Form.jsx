@@ -2,90 +2,97 @@ import s from './Form.module.css';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import PhoneInput from 'react-phone-number-input/input';
-export default function Form({ onSubmit }) {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+import { useForm } from 'react-hook-form';
+export default function Form(props) {
+  const { register, handleSubmit } = useForm();
   const [value, setValue] = useState('');
 
+  // const [firstName, setFirstName] = useState('');
+  // const [phoneNumber, setPhoneNumber] = useState('');
+  // const [name, setName] = useState('');
+
   const handleChange = ({ target: { dataset, value } }) => {
-    switch (dataset.id) {
-      case 'name':
-        setName(value);
-        break;
-      case 'phoneNumber':
-        setPhoneNumber(value);
-        break;
-      default:
-        throw new Error(`there are no ${dataset.id} `);
-    }
+    console.log(dataset);
+    console.log(value);
+    // switch (dataset.id) {
+    //   case 'first-name':
+    //     setName(value);
+    //     break;
+    //   case 'second-name':
+    //     setPhoneNumber(value);
+    //     break;
+    //   case 'email':
+    //     setPhoneNumber(value);
+    //     break;
+    //   case 'phoneNumber':
+    //     setPhoneNumber(value);
+    //     break;
+    //   default:
+    //     throw new Error(`there are no ${dataset.id} `);
+    // }
   };
+  const onSubmit = data => console.log(data);
+  // const handleSubmit = e => {
+  //   e.preventDefault();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (name.length > 0 && phoneNumber.length > 0) {
-      onSubmit({
-        id: uuidv4(),
-        name,
-        phoneNumber,
-      });
-      resetForm();
-    }
-  };
+  //   if (name.length > 0 && phoneNumber.length > 0) {
+  //     onSubmit({
+  //       id: uuidv4(),
+  //       name,
+  //       phoneNumber,
+  //     });
+  //     resetForm();
+  //   }
+  // };
 
   function resetForm() {
-    setName('');
-    setPhoneNumber('');
+    // setName('');
+    // setPhoneNumber('');
   }
 
   return (
-    <form className={s.form} onSubmit={handleSubmit} autoComplete="off">
+    <form
+      className={s.form}
+      onSubmit={handleSubmit(onSubmit)}
+      autoComplete="off"
+    >
       <label className={s.label}>
         <span>Имя</span>
         <input
-          type="text"
+          type="name"
+          name="first-name"
           className={s.input}
-          value={name}
-          onChange={handleChange}
-          data-id="first-name"
+          ref={register}
         />
       </label>
       <label className={s.label}>
         <span>Фамилия</span>
         <input
-          type="text"
+          type="name"
+          name="second-name"
           className={s.input}
-          value={name}
-          onChange={handleChange}
-          data-id="second-name"
+          ref={register}
         />
       </label>
       <label className={s.label}>
         <span>E-mail</span>
-        <input
-          type="email"
-          className={s.input}
-          value={name}
-          onChange={handleChange}
-          data-id="email"
-        />
+        <input type="email" name="email" className={s.input} ref={register} />
       </label>
       <label className={s.label}>
         <span>Phone number</span>
         <PhoneInput
-          placeholder="Phone number"
-          // className={s.input}
+          name="phoneNumber"
+          className={s.input}
           country="UA"
           international
-          initialValueFormat="national"
           value={value}
           onChange={setValue}
-          data-id="phoneNumber"
+          // ref={register}
         />
       </label>
       <label>
         <span style={{ display: 'block' }}>Избранные</span>
-        <select name="isChosen">
+        <select name="isChosen" ref={register}>
           <option value="true">Да</option>
           <option value="false">Нет</option>
         </select>
