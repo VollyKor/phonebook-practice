@@ -11,6 +11,8 @@ import { useState, useEffect } from 'react';
 //  const unmask = value.replace(/\D/g, '');
 
 export default function Form(props) {
+  const [submittedData, setSubmittedData] = useState({});
+
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -50,7 +52,6 @@ export default function Form(props) {
 
   // reset Form with default values par  .№2
   // =========================
-  // const [submittedData, setSubmittedData] = useState({});
   // useEffect(() => {
   //   if (isSubmitSuccessful) {
   //     reset({ ...defaultValues });
@@ -60,9 +61,9 @@ export default function Form(props) {
 
   // Submit Form
   const onSubmit = (data, e) => {
-    // setSubmittedData(data);
+    setSubmittedData(data);
     console.log(data);
-    // e.target.reset();
+    e.target.reset();
   };
 
   return (
