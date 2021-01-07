@@ -5,6 +5,9 @@ import ContactList from './Components/ContactList/ContactList';
 import Filter from './Components/Filter/Filter';
 import NavBar from './Components/NavBar/NavBar';
 import { Switch, Route } from 'react-router-dom';
+import AddContact from './Components/AddContact/AddContact';
+import Modal from './Components/Modal/Modal';
+import CloseButton from './Components/CloseButton/CloseButton';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';
@@ -20,6 +23,7 @@ const testContacts = [
 function App() {
   const [contacts, setContacts] = useState(() => [...testContacts]);
   const [filterQuery, setFilter] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // get items from ls on first render
   useEffect(() => {
@@ -46,6 +50,11 @@ function App() {
     setContacts(prevState => [...prevState, newContact]);
   };
 
+  function handleClick(e) {
+    setIsModalVisible(true);
+    console.log(e);
+  }
+
   const visibleContacts = () => {
     const filtered = filterQuery.toLowerCase();
     const filteredArr = contacts.filter(({ name }) =>
@@ -67,9 +76,20 @@ function App() {
         <Switch>
           <Route path="/phonebook">
             <h1>Phone Book</h1>
-            <Form onSubmit={addContact} />
+
+            {isModalVisible && (
+              <Modal onClose={() => setIsModalVisible(false)}>
+                <CloseButton onClose={() => setIsModalVisible(false)} />
+                <Form onSubmit={addContact} />
+              </Modal>
+            )}
+            {/* {isModalVisible ?? <Modal onClose={setIsModalVisible(false)} />} */}
+
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
+              <AddContact handleClick={handleClick} />
+            </div>
             <h2>Contact List</h2>
-            <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
             <ContactList
               ContactList={visibleContacts()}
               removeContact={removeContact}
