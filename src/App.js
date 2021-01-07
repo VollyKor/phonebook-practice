@@ -11,13 +11,41 @@ import CloseButton from './Components/CloseButton/CloseButton';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';
-// uuidv4();
+// uuidv4(); / generate id
 
 const testContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', phoneNumber: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', phoneNumber: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', phoneNumber: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', phoneNumber: '227-91-26' },
+  {
+    id: 'id-1',
+    firstName: 'Simpson',
+    lastName: 'Rosie',
+    phoneNumber: '459-12-56',
+    isChosen: true,
+    email: '123@gmail.com',
+  },
+  {
+    id: 'id-2',
+    firstName: 'Kline',
+    lastName: 'Hermione',
+    phoneNumber: '443-89-12',
+    isChosen: true,
+    email: '123@gmail.com',
+  },
+  {
+    id: 'id-3',
+    firstName: 'Clements',
+    lastName: 'Eden',
+    phoneNumber: '645-17-79',
+    isChosen: true,
+    email: '123@gmail.com',
+  },
+  {
+    id: 'id-4',
+    firstName: 'Copeland',
+    lastName: 'Annie',
+    phoneNumber: '227-91-26',
+    isChosen: true,
+    email: '123@gmail.com',
+  },
 ];
 
 function App() {
@@ -25,7 +53,7 @@ function App() {
   const [filterQuery, setFilter] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // get items from ls on first render
+  // get items from local storage on first render
   useEffect(() => {
     if (localStorage.getItem('contacts') !== null) {
       const data = JSON.parse(localStorage.getItem('contacts'));
@@ -33,32 +61,28 @@ function App() {
     }
   }, []);
 
-  // add items to ls
+  // add items to local storage
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
+  // add contact to Contact List
   const addContact = newContact => {
     if (
-      contacts.some(({ name }) => {
-        return name.includes(newContact.name);
+      contacts.some(({ firstName }) => {
+        return firstName.includes(newContact.firstName);
       })
     ) {
-      alert(`${newContact.name} is already in contacts`);
+      alert(`${newContact.firstName} is already in contacts`);
       return;
     }
     setContacts(prevState => [...prevState, newContact]);
   };
 
-  function handleClick(e) {
-    setIsModalVisible(true);
-    console.log(e);
-  }
-
   const visibleContacts = () => {
     const filtered = filterQuery.toLowerCase();
-    const filteredArr = contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filtered),
+    const filteredArr = contacts.filter(({ firstName }) =>
+      firstName.toLowerCase().includes(filtered),
     );
     return filteredArr;
   };
@@ -75,21 +99,19 @@ function App() {
       <main className="container">
         <Switch>
           <Route path="/phonebook">
-            <h1>Phone Book</h1>
+            {/* <h1>Phone Book</h1> */}
 
             {isModalVisible && (
               <Modal onClose={() => setIsModalVisible(false)}>
                 <CloseButton onClose={() => setIsModalVisible(false)} />
-                <Form onSubmit={addContact} />
+                <Form addContact={addContact} />
               </Modal>
             )}
-            {/* {isModalVisible ?? <Modal onClose={setIsModalVisible(false)} />} */}
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
-              <AddContact handleClick={handleClick} />
+              <AddContact handleClick={() => setIsModalVisible(true)} />
             </div>
-            <h2>Contact List</h2>
             <ContactList
               ContactList={visibleContacts()}
               removeContact={removeContact}

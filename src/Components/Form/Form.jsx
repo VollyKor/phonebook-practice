@@ -1,16 +1,16 @@
 import s from './Form.module.css';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 //  регулярное выраженияе для фильтрации чисел
 // +3 (111) 111-11-11 ==> 31111111111
 //  const unmask = value.replace(/\D/g, '');
 
-export default function Form(props) {
+export default function Form({ addContact }) {
   const [submittedData, setSubmittedData] = useState({});
 
   //  Validation
@@ -18,7 +18,6 @@ export default function Form(props) {
   const schema = yup.object().shape({
     firstName: yup.string().min(3, 'больше 3х').max(20).required(),
     lastName: yup.string().min(3).max(20).required(),
-    // phoneNumber: yup.number().required().positive().integer(),
     phoneNumber: yup
       .string()
       .test('len', 'Нужно подставить все значения', val => {
@@ -60,9 +59,14 @@ export default function Form(props) {
   // }, [isSubmitSuccessful, reset]);
 
   // Submit Form
+  // ==============================================================
   const onSubmit = (data, e) => {
     setSubmittedData(data);
-    console.log(data);
+    data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
+    data.id = uuidv4();
+    addContact(data);
+
+    // console.log(data);
     e.target.reset();
   };
 
