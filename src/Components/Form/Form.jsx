@@ -10,7 +10,7 @@ import { useState } from 'react';
 // +3 (111) 111-11-11 ==> 31111111111
 //  const unmask = value.replace(/\D/g, '');
 
-export default function Form({ addContact }) {
+export default function Form({ addContact, contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
 
   //  Validation
@@ -30,11 +30,29 @@ export default function Form({ addContact }) {
 
   // react hook form with default values part №1
   // ====================================
-  // const defaultValues = {
-  //   firstName: '',
-  //   lastName: '',
-  //   phoneNumber: '',
-  //   email: '',
+
+  function defaultValues() {
+    if (contactObj) {
+      const { id, firstName, lastName, phoneNumber, email } = contactObj;
+      return {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+      };
+    }
+    return {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+    };
+  }
+  //   const defaultValues = {
+  //   firstName,
+  //   lastName,
+  //   phoneNumber,
+  //   email,
   // };
 
   const {
@@ -46,7 +64,7 @@ export default function Form({ addContact }) {
   } = useForm({
     resolver: yupResolver(schema),
     // reValidateMode: 'onSubmit',
-    // defaultValues: defaultValues,   //  for reset form with default values
+    defaultValues: defaultValues(), //  for reset form with default values
   });
 
   // reset Form with default values par  .№2
@@ -119,10 +137,15 @@ export default function Form({ addContact }) {
           <option value="false">Нет</option>
         </select>
       </label>
-
-      <button type="submit" className={s.btn}>
-        Add contact
-      </button>
+      {contactObj ? (
+        <button className={s.btn} type="submit">
+          save changes
+        </button>
+      ) : (
+        <button type="submit" className={s.btn}>
+          Add contact
+        </button>
+      )}
     </form>
   );
 }
