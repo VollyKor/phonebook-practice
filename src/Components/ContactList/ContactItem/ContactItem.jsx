@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
+import context from '../../../context/contactsCtx';
 // import InputMask from 'react-input-mask';
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAddInfo, setShowAddInfo] = useState(false);
-  const { firstName, lastName, phoneNumber, email, isChosen } = contactObj;
+  const { removeContact, changeContact } = useContext(context);
+
+  const { firstName, lastName, phoneNumber, email, isChosen, id } = contactObj;
   return (
     <>
       <div style={{ position: 'relative' }}>
@@ -15,6 +18,7 @@ export default function ContactItem({ contactObj }) {
           <span>{` ${firstName} ${lastName} `}</span>
           <span>{phoneNumber}</span>
         </p>
+
         <button
           onClick={() => {
             setShowAddInfo(true);
@@ -22,6 +26,7 @@ export default function ContactItem({ contactObj }) {
         >
           More Info
         </button>
+
         <button
           onClick={() => {
             setIsModalVisible(true);
@@ -29,7 +34,15 @@ export default function ContactItem({ contactObj }) {
         >
           Change Contact
         </button>
-        <button>Delete Contact</button>
+
+        <button
+          onClick={() => {
+            removeContact(id);
+          }}
+        >
+          Delete Contact
+        </button>
+
         {showAddInfo && (
           <AdditionalInfo
             contactObj={contactObj}
@@ -39,6 +52,7 @@ export default function ContactItem({ contactObj }) {
           />
         )}
       </div>
+
       {isModalVisible && (
         <Modal
           onClose={() => {

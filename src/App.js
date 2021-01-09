@@ -1,13 +1,16 @@
 import './App.module.css';
 import React, { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
+
 import Form from './Components/Form/Form';
 import ContactList from './Components/ContactList/ContactList';
 import Filter from './Components/Filter/Filter';
 import NavBar from './Components/NavBar/NavBar';
-import { Switch, Route } from 'react-router-dom';
 import AddContact from './Components/AddContact/AddContact';
 import Modal from './Components/Modal/Modal';
 import CloseButton from './Components/CloseButton/CloseButton';
+
+import contactsCtx from './context/contactsCtx';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';
@@ -50,10 +53,12 @@ const testContacts = [
 
 function App() {
   const [contacts, setContacts] = useState(() => [...testContacts]);
+
   const [filterQuery, setFilter] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   // get items from local storage on first render
+  // =====================================
   useEffect(() => {
     if (localStorage.getItem('contacts') !== null) {
       const data = JSON.parse(localStorage.getItem('contacts'));
@@ -62,11 +67,13 @@ function App() {
   }, []);
 
   // add items to local storage
+  // =====================================
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
   // add contact to Contact List
+  // =====================================
   const addContact = newContact => {
     if (
       contacts.some(({ firstName }) => {
@@ -79,6 +86,34 @@ function App() {
     setContacts(prevState => [...prevState, newContact]);
   };
 
+  //  remove Contact
+  // =====================================
+  const removeContact = idToRemove => {
+    console.log('remove Contact');
+    const newContactsArray = contacts.filter(({ id }) => id !== idToRemove);
+    setContacts(newContactsArray);
+  };
+
+  //  change Contact
+  // ========================================
+  const changeContact = (contactObj, id) => {
+    console.log('contactObj', contactObj);
+    const changeContactsArray = contacts.reduce((acc, e) => {
+      // console.log('acc', acc);
+      console.log('e.id', e.id);
+      console.log('contactObj.id', contactObj.id);
+      // console.log('arr', arr);
+      console.log('e.id === contactObj.id', e.id === contactObj.id);
+      if (e.id === id) {
+        acc.push(contactObj);
+        return acc;
+      }
+      acc.push(e);
+      return acc;
+    }, []);
+    setContacts(changeContactsArray);
+  };
+
   const visibleContacts = () => {
     const filtered = filterQuery.toLowerCase();
     const filteredArr = contacts.filter(({ firstName }) =>
@@ -87,40 +122,47 @@ function App() {
     return filteredArr;
   };
 
-  const removeContact = idToRemove => {
-    console.log('remove Contact');
-    const newContactsArray = contacts.filter(({ id }) => id !== idToRemove);
-    setContacts(newContactsArray);
-  };
-
   return (
     <>
-      <NavBar />
-      <main className="container">
-        <Switch>
-          <Route path="/phonebook">
-            {/* <h1>Phone Book</h1> */}
+      <contactsCtx.Provider
+        value={{
+          contacts,
+          setContacts,
+          removeContact,
+          changeContact,
+          addContact,
+        }}
+      >
+        <NavBar />
+        <main className="container">
+          <Switch>
+            <Route path="/phonebook">
+              {/* <h1>Phone Book</h1> */}
 
-            {isModalVisible && (
-              <Modal onClose={() => setIsModalVisible(false)}>
-                <CloseButton onClose={() => setIsModalVisible(false)} />
-                <Form addContact={addContact} />
-              </Modal>
-            )}
+              {isModalVisible && (
+                <Modal onClose={() => setIsModalVisible(false)}>
+                  <CloseButton onClose={() => setIsModalVisible(false)} />
+                  <Form addContact={addContact} />
+                </Modal>
+              )}
 
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Filter data={{ contacts, filterQuery }} setFilter={setFilter} />
-              <AddContact handleClick={() => setIsModalVisible(true)} />
-            </div>
-            <ContactList
-              ContactList={visibleContacts()}
-              removeContact={removeContact}
-            />
-          </Route>
-          <Route path="/notes">notes</Route>
-          <Route path="/" exact />
-        </Switch>
-      </main>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Filter
+                  data={{ contacts, filterQuery }}
+                  setFilter={setFilter}
+                />
+                <AddContact handleClick={() => setIsModalVisible(true)} />
+              </div>
+              <ContactList
+                ContactList={visibleContacts()}
+                removeContact={removeContact}
+              />
+            </Route>
+            <Route path="/notes">notes</Route>
+            <Route path="/" exact />
+          </Switch>
+        </main>
+      </contactsCtx.Provider>
     </>
   );
 }
