@@ -99,18 +99,19 @@ function App() {
   const changeContact = (contactObj, id) => {
     console.log('contactObj', contactObj);
     const changeContactsArray = contacts.reduce((acc, e) => {
-      // console.log('acc', acc);
       console.log('e.id', e.id);
       console.log('contactObj.id', contactObj.id);
-      // console.log('arr', arr);
-      console.log('e.id === contactObj.id', e.id === contactObj.id);
+      console.log('e.id === contactObj.id', e.id === id);
+
       if (e.id === id) {
+        contactObj.id = id;
         acc.push(contactObj);
         return acc;
       }
       acc.push(e);
       return acc;
     }, []);
+    console.log('changeContactsArray', changeContactsArray);
     setContacts(changeContactsArray);
   };
 

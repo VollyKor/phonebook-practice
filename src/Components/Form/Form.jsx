@@ -39,7 +39,6 @@ export default function Form({ contactObj }) {
         lastName,
         phoneNumber,
         email,
-        id,
       };
     }
     return {
@@ -81,6 +80,7 @@ export default function Form({ contactObj }) {
   // ==============================================================
   const onSubmit = (data, e) => {
     data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
+    console.log(!contactObj);
     if (!contactObj) {
       data.id = uuidv4();
       setSubmittedData(data);
@@ -89,7 +89,7 @@ export default function Form({ contactObj }) {
       e.target.reset();
       return;
     }
-    console.log('contactObj.id', contactObj.id);
+
     changeContact(data, contactObj.id);
   };
 
