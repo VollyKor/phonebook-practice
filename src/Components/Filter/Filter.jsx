@@ -18,8 +18,3 @@ export default function Filter({ setFilter, data: { filter } }) {
     </div>
   );
 }
-// перебор
-// если содержит алерт и стоп
-// если нет добавили контакт
-//
-//

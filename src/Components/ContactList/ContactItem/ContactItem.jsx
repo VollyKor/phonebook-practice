@@ -2,13 +2,13 @@ import { useState, useContext } from 'react';
 import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
-import context from '../../../context/contactsCtx';
+import { ContactCtx } from '../../../context/ContactsService';
 // import InputMask from 'react-input-mask';
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAddInfo, setShowAddInfo] = useState(false);
-  const { removeContact, changeContact } = useContext(context);
+  const { removeContact, changeContact } = useContext(ContactCtx);
 
   const { firstName, lastName, phoneNumber, email, isChosen, id } = contactObj;
   return (

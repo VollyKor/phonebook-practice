@@ -5,14 +5,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState, useContext } from 'react';
-import contactsCtx from '../../context/contactsCtx';
+import { ContactCtx } from '../../context/ContactsService';
+
 //  регулярное выраженияе для фильтрации чисел
 // +3 (111) 111-11-11 ==> 31111111111
 //  const unmask = value.replace(/\D/g, '');
 
 export default function Form({ contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
-  const { changeContact, addContact } = useContext(contactsCtx);
+  const { changeContact, addContact } = useContext(ContactCtx);
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -80,7 +81,7 @@ export default function Form({ contactObj }) {
   // ==============================================================
   const onSubmit = (data, e) => {
     data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
-    console.log(!contactObj);
+
     if (!contactObj) {
       data.id = uuidv4();
       setSubmittedData(data);
