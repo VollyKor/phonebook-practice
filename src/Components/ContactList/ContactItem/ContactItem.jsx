@@ -3,7 +3,6 @@ import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import context from '../../../context/contactsCtx';
-// import InputMask from 'react-input-mask';
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -13,13 +12,15 @@ export default function ContactItem({ contactObj }) {
   const { firstName, lastName, phoneNumber, email, isChosen, id } = contactObj;
   return (
     <>
-      <div style={{ position: 'relative' }}>
-        <p>
-          <span>{` ${firstName} ${lastName} `}</span>
-          <span>{phoneNumber}</span>
-        </p>
+      <p className="text-center">
+        <span className="card-title">{` ${firstName} ${lastName} `}</span>
+        <span className="card-subtitle text-muted">{phoneNumber}</span>
+      </p>
 
+      <div className="d-flex">
         <button
+          type="button"
+          className="btn btn-sm btn-secondary mx-auto"
           onClick={() => {
             setShowAddInfo(true);
           }}
@@ -28,6 +29,8 @@ export default function ContactItem({ contactObj }) {
         </button>
 
         <button
+          type="button"
+          className="btn btn-sm btn-secondary mx-auto"
           onClick={() => {
             setIsModalVisible(true);
           }}
@@ -36,22 +39,24 @@ export default function ContactItem({ contactObj }) {
         </button>
 
         <button
+          type="button"
+          className="btn btn-sm btn-secondary mx-auto"
           onClick={() => {
             removeContact(id);
           }}
         >
           Delete Contact
         </button>
-
-        {showAddInfo && (
-          <AdditionalInfo
-            contactObj={contactObj}
-            hide={() => {
-              setShowAddInfo(false);
-            }}
-          />
-        )}
       </div>
+
+      {showAddInfo && (
+        <AdditionalInfo
+          contactObj={contactObj}
+          hide={() => {
+            setShowAddInfo(false);
+          }}
+        />
+      )}
 
       {isModalVisible && (
         <Modal

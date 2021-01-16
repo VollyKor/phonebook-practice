@@ -1,8 +1,9 @@
 export default function AddContact({ handleClick }) {
   return (
     <button
+      type="button"
       onClick={handleClick}
-      style={{ width: '100px', height: '20px', marginLeft: '15px' }}
+      className="btn btn-default  btn-dark col-sm-2"
     >
       Add Contact
     </button>

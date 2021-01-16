@@ -1,4 +1,3 @@
-import './App.module.css';
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
@@ -99,10 +98,6 @@ function App() {
   const changeContact = (contactObj, id) => {
     console.log('contactObj', contactObj);
     const changeContactsArray = contacts.reduce((acc, e) => {
-      console.log('e.id', e.id);
-      console.log('contactObj.id', contactObj.id);
-      console.log('e.id === contactObj.id', e.id === id);
-
       if (e.id === id) {
         contactObj.id = id;
         acc.push(contactObj);
@@ -138,8 +133,6 @@ function App() {
         <main className="container">
           <Switch>
             <Route path="/phonebook">
-              {/* <h1>Phone Book</h1> */}
-
               {isModalVisible && (
                 <Modal onClose={() => setIsModalVisible(false)}>
                   <CloseButton onClose={() => setIsModalVisible(false)} />
@@ -147,7 +140,7 @@ function App() {
                 </Modal>
               )}
 
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="row my-2 justify-content-around">
                 <Filter
                   data={{ contacts, filterQuery }}
                   setFilter={setFilter}
