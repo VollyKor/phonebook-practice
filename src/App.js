@@ -10,6 +10,7 @@ import Modal from './Components/Modal/Modal';
 import CloseButton from './Components/CloseButton/CloseButton';
 
 import contactsCtx from './context/contactsCtx';
+import AddTodoForm from './Components/AddTodoForm/AddTodoForm';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';
@@ -152,7 +153,9 @@ function App() {
                 removeContact={removeContact}
               />
             </Route>
-            <Route path="/notes">notes</Route>
+            <Route path="/notes">
+              <AddTodoForm />
+            </Route>
             <Route path="/" exact />
           </Switch>
         </main>

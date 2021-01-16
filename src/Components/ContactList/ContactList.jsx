@@ -1,4 +1,5 @@
 import ContactItem from './ContactItem/ContactItem';
+import s from './ContactList.module.css';
 
 export default function ContactList({ ContactList }) {
   return (
@@ -6,14 +7,10 @@ export default function ContactList({ ContactList }) {
       <h2 className="text-center text-light rounded-3 bg-secondary p-5">
         Contact List
       </h2>
-      <ul className="row justify-content-around">
+      <ul className={`${s.list}`}>
         {ContactList.map(el => {
           return (
-            <li
-              key={el.id}
-              style={{ position: 'relative' }}
-              className="card-body col-sm-12 col-md-6 col-lg-4 offset-lg-1 border border-1 rounded-2"
-            >
+            <li key={el.id} className={`${s.item} border border-1 rounded-2`}>
               <ContactItem contactObj={el} />
             </li>
           );

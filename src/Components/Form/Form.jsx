@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState, useContext } from 'react';
 import contactsCtx from '../../context/contactsCtx';
+
 //  регулярное выраженияе для фильтрации чисел
 // +3 (111) 111-11-11 ==> 31111111111
 //  const unmask = value.replace(/\D/g, '');
@@ -48,6 +49,7 @@ export default function Form({ contactObj }) {
       email: '',
     };
   }
+
   //   const defaultValues = {
   //   firstName,
   //   lastName,
@@ -85,7 +87,6 @@ export default function Form({ contactObj }) {
       data.id = uuidv4();
       setSubmittedData(data);
       addContact(data);
-
       e.target.reset();
       return;
     }
@@ -94,42 +95,46 @@ export default function Form({ contactObj }) {
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-      <label className={s.label}>
+    <form className="row g-2 p-3" onSubmit={handleSubmit(onSubmit)}>
+      <h3 className="text-center">
+        {contactObj ? 'Форма изменения контактов' : 'Форма добавления контакта'}
+      </h3>
+
+      <label className="form-label">
         <span>Фамилия</span>
         <input
           type="name"
           name="firstName"
-          className={s.input}
+          className="form-control"
           ref={register({ required: true, maxLength: 20 })}
         />
         <p>{errors.firstName?.message}</p>
       </label>
 
-      <label className={s.label}>
+      <label className="form-label">
         <span>Имя</span>
         <input
           type="name"
           name="lastName"
-          className={s.input}
+          className="form-control"
           ref={register({ required: true, maxLength: 20 })}
         />
         <p>{errors.lastName?.message}</p>
       </label>
 
-      <label className={s.label}>
+      <label className="form-label">
         <span>E-mail</span>
-        <input name="email" className={s.input} ref={register} />
+        <input name="email" className="form-control" ref={register} />
         <p>{errors.email?.message}</p>
       </label>
 
-      <label className={s.label}>
+      <label className="form-label">
         <span>Phone number</span>
         <InputMask
           name="phoneNumber"
           mask="+3 (999) 999-99-99"
           alwaysShowMask={true}
-          className={s.input}
+          className="form-control"
           ref={register}
         />
         <p>{errors.phoneNumber?.message}</p>
@@ -143,11 +148,17 @@ export default function Form({ contactObj }) {
         </select>
       </label>
       {contactObj ? (
-        <button className={s.btn} type="submit">
+        <button
+          className="d-inline btn btn-default btn-dark mx-auto"
+          type="submit"
+        >
           save changes
         </button>
       ) : (
-        <button type="submit" className={s.btn}>
+        <button
+          type="submit"
+          className="d-inline btn btn-default btn-dark mx-auto"
+        >
           Add contact
         </button>
       )}

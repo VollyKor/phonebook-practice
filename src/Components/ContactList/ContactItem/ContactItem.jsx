@@ -64,7 +64,6 @@ export default function ContactItem({ contactObj }) {
             setIsModalVisible(false);
           }}
         >
-          <p>Форма для изменения</p>
           <Form contactObj={contactObj}></Form>
         </Modal>
       )}
