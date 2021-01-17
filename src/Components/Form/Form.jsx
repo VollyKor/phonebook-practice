@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState, useContext } from 'react';
-import contactsCtx from '../../context/contactsCtx';
+import ContactCtx from '../../context/contactsCtx';
 
 //  регулярное выраженияе для фильтрации чисел
 // +3 (111) 111-11-11 ==> 31111111111
@@ -13,7 +13,8 @@ import contactsCtx from '../../context/contactsCtx';
 
 export default function Form({ contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
-  const { changeContact, addContact } = useContext(contactsCtx);
+  const { changeContact, addContact } = useContext(ContactCtx);
+
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -31,10 +32,9 @@ export default function Form({ contactObj }) {
 
   // react hook form with default values part №1
   // ====================================
-
   function defaultValues() {
     if (contactObj) {
-      const { id, firstName, lastName, phoneNumber, email } = contactObj;
+      const { firstName, lastName, phoneNumber, email } = contactObj;
       return {
         firstName,
         lastName,
@@ -49,13 +49,6 @@ export default function Form({ contactObj }) {
       email: '',
     };
   }
-
-  //   const defaultValues = {
-  //   firstName,
-  //   lastName,
-  //   phoneNumber,
-  //   email,
-  // };
 
   const {
     register,
@@ -82,11 +75,12 @@ export default function Form({ contactObj }) {
   // ==============================================================
   const onSubmit = (data, e) => {
     data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
-    console.log(!contactObj);
+
     if (!contactObj) {
       data.id = uuidv4();
       setSubmittedData(data);
       addContact(data);
+
       e.target.reset();
       return;
     }
@@ -95,46 +89,42 @@ export default function Form({ contactObj }) {
   };
 
   return (
-    <form className="row g-2 p-3" onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-center">
-        {contactObj ? 'Форма изменения контактов' : 'Форма добавления контакта'}
-      </h3>
-
-      <label className="form-label">
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <label className={s.label}>
         <span>Фамилия</span>
         <input
           type="name"
           name="firstName"
-          className="form-control"
+          className={s.input}
           ref={register({ required: true, maxLength: 20 })}
         />
         <p>{errors.firstName?.message}</p>
       </label>
 
-      <label className="form-label">
+      <label className={s.label}>
         <span>Имя</span>
         <input
           type="name"
           name="lastName"
-          className="form-control"
+          className={s.input}
           ref={register({ required: true, maxLength: 20 })}
         />
         <p>{errors.lastName?.message}</p>
       </label>
 
-      <label className="form-label">
+      <label className={s.label}>
         <span>E-mail</span>
-        <input name="email" className="form-control" ref={register} />
+        <input name="email" className={s.input} ref={register} />
         <p>{errors.email?.message}</p>
       </label>
 
-      <label className="form-label">
+      <label className={s.label}>
         <span>Phone number</span>
         <InputMask
           name="phoneNumber"
           mask="+3 (999) 999-99-99"
           alwaysShowMask={true}
-          className="form-control"
+          className={s.input}
           ref={register}
         />
         <p>{errors.phoneNumber?.message}</p>
@@ -148,17 +138,11 @@ export default function Form({ contactObj }) {
         </select>
       </label>
       {contactObj ? (
-        <button
-          className="d-inline btn btn-default btn-dark mx-auto"
-          type="submit"
-        >
+        <button className={s.btn} type="submit">
           save changes
         </button>
       ) : (
-        <button
-          type="submit"
-          className="d-inline btn btn-default btn-dark mx-auto"
-        >
+        <button type="submit" className={s.btn}>
           Add contact
         </button>
       )}

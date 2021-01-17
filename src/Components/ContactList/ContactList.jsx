@@ -4,7 +4,7 @@ import s from './ContactList.module.css';
 export default function ContactList({ ContactList }) {
   return (
     <div className="container">
-      <h2 className="text-center text-light rounded-3 bg-secondary p-5">
+      <h2 className="text-center text-light rounded-3 bg-secondary p-2">
         Contact List
       </h2>
       <ul className={`${s.list}`}>
