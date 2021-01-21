@@ -3,40 +3,29 @@ import s from './NavBar.module.scss';
 
 export default function NavBar() {
   return (
-    <header>
-      <nav className={s.navBar}>
-        <div className="container">
-          <ul className="navbar-nav mb-2 mb-lg-0 justify-content-start">
-            <li className=" ">
-              <NavLink
-                to="/phonebook"
-                className="nav-link link-dark"
-                activeClassName="active"
-              >
-                Телефонная книга
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/notes"
-                className="nav-link link-primary"
-                activeClassName="active"
-              >
-                Заметки
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/"
-                className="nav-link link-primary"
-                activeClassName="active"
-                exact
-              >
-                Что-то еще
-              </NavLink>
-            </li>
-          </ul>
-        </div>
+    <header className={s.header}>
+      <nav className={`container ${s.navBar}`}>
+        <ul className={s.list}>
+          <li className={s.item}>
+            <NavLink
+              to="/phonebook"
+              className={s.link}
+              activeClassName={s.active}
+            >
+              Телефонная книга
+            </NavLink>
+          </li>
+          <li className={s.item}>
+            <NavLink to="/notes" className={s.link} activeClassName={s.active}>
+              Заметки
+            </NavLink>
+          </li>
+          <li className={s.item}>
+            <NavLink to="/" className={s.link} activeClassName={s.active} exact>
+              Что-то еще
+            </NavLink>
+          </li>
+        </ul>
       </nav>
     </header>
   );

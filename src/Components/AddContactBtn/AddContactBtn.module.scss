@@ -1,0 +1,12 @@
+@import "../../Sass/utility/variables";
+
+.btn {
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $divider-color;
+  }
+}

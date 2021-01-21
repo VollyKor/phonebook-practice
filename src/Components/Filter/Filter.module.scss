@@ -1,0 +1,18 @@
+@import "../../Sass/utility/variables";
+
+.input {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  color: $primary-color-text;
+  padding: 10px;
+}
+
+.label > span {
+  margin-right: 10px;
+}

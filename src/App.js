@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Form from './Components/Form/Form';
-import ContactList from './Components/ContactList/ContactList';
-import Filter from './Components/Filter/Filter';
 import NavBar from './Components/NavBar/NavBar';
-import AddContact from './Components/AddContact/AddContact';
 import Modal from './Components/Modal/Modal';
 import CloseButton from './Components/CloseButton/CloseButton';
-
+import Phonebook from './Components/Phonebook/Phonebook';
 import contactsCtx from './context/contactsCtx';
 import AddTodoForm from './Components/Todos/AddTodoForm/AddTodoForm';
 import Todos from './Components/Todos/Todos';
@@ -141,16 +138,11 @@ function App() {
                   <Form addContact={addContact} />
                 </Modal>
               )}
-
-              <div className="row my-2 justify-content-around">
-                <Filter
-                  data={{ contacts, filterQuery }}
-                  setFilter={setFilter}
-                />
-                <AddContact handleClick={() => setIsModalVisible(true)} />
-              </div>
-              <ContactList
-                ContactList={visibleContacts()}
+              <Phonebook
+                data={{ contacts, filterQuery }}
+                setFilter={setFilter}
+                handleCLick={() => setIsModalVisible(true)}
+                contactList={visibleContacts()}
                 removeContact={removeContact}
               />
             </Route>

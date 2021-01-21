@@ -1,6 +1,49 @@
-.navBar {
-  background-color: teal;
-  &:hover {
-    background-color: tomato;
+@import "../../Sass/utility/variables";
+
+.header {
+  background-color: $primary-color;
+}
+.list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  padding: 10px;
+  color: $primary-color-text;
+}
+.item {
+  &:not(:last-child) {
+    margin-right: 15px;
   }
+}
+
+.link {
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  text-decoration: none;
+  font-weight: 700;
+  color: $primary-color-text;
+  &:hover {
+    color: $primary-text-color;
+  }
+}
+
+a.link.active {
+  color: $primary-text-color;
+  background-color: white;
+  border-radius: 5px;
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+
+  //   width: 100%;
+  //   height: 6px;
+
+  //   background-color: $primary-text-color;
+  //   border-radius: 4px;
+  //   display: block;
+  // z-index: 2;
+  // }
 }

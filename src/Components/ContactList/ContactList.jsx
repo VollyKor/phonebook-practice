@@ -1,25 +1,23 @@
 import ContactItem from './ContactItem/ContactItem';
-import s from './ContactList.module.css';
+import s from './ContactList.module.scss';
 
-export default function ContactList({ ContactList }) {
+export default function ContactList({ contactList }) {
   return (
-    <div className="container">
-      <h2 className="text-center text-light rounded-3 bg-secondary p-2">
+    <>
+      <h2 className={s.title} hidden>
         Contact List
       </h2>
-      <ul className={`${s.list}`}>
-        {ContactList.map(el => {
+      <ul className={`${s.list} ${s.listWrapper}`}>
+        {contactList.map(el => {
           return (
-            <li
-              tabIndex="0"
-              key={el.id}
-              className={`${s.item} border border-1 rounded-2`}
-            >
-              <ContactItem contactObj={el} />
+            <li tabIndex="0" key={el.id} className={s.item}>
+              <div className={s.itemWrapper}>
+                <ContactItem contactObj={el} />
+              </div>
             </li>
           );
         })}
       </ul>
-    </div>
+    </>
   );
 }
