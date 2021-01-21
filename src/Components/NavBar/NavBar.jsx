@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
+import s from './NavBar.module.scss';
 
 export default function NavBar() {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-secondary">
+      <nav className={s.navBar}>
         <div className="container">
           <ul className="navbar-nav mb-2 mb-lg-0 justify-content-start">
             <li className=" ">
