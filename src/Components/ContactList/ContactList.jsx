@@ -10,7 +10,11 @@ export default function ContactList({ ContactList }) {
       <ul className={`${s.list}`}>
         {ContactList.map(el => {
           return (
-            <li key={el.id} className={`${s.item} border border-1 rounded-2`}>
+            <li
+              tabIndex="0"
+              key={el.id}
+              className={`${s.item} border border-1 rounded-2`}
+            >
               <ContactItem contactObj={el} />
             </li>
           );
