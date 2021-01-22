@@ -134,7 +134,6 @@ function App() {
             <Route path="/phonebook">
               {isModalVisible && (
                 <Modal onClose={() => setIsModalVisible(false)}>
-                  <CloseButton onClose={() => setIsModalVisible(false)} />
                   <Form addContact={addContact} />
                 </Modal>
               )}

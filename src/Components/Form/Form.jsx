@@ -1,4 +1,4 @@
-import s from './Form.module.css';
+import s from './Form.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
@@ -74,7 +74,7 @@ export default function Form({ contactObj }) {
   // Submit Form
   // ==============================================================
   const onSubmit = (data, e) => {
-    data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
+    // data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
 
     if (!contactObj) {
       data.id = uuidv4();
@@ -90,19 +90,23 @@ export default function Form({ contactObj }) {
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <h2 className={s.title}>
+        {contactObj ? 'Change Contact' : 'New Contact'}
+      </h2>
+
       <label className={s.label}>
-        <span>Фамилия</span>
+        <span>First Name</span>
         <input
           type="name"
           name="firstName"
           className={s.input}
           ref={register({ required: true, maxLength: 20 })}
         />
-        <p>{errors.firstName?.message}</p>
+        {errors.message ? <p>{errors.firstName?.message} </p> : false}
       </label>
 
       <label className={s.label}>
-        <span>Имя</span>
+        <span>Second Name</span>
         <input
           type="name"
           name="lastName"
@@ -131,7 +135,7 @@ export default function Form({ contactObj }) {
       </label>
 
       <label>
-        <span style={{ display: 'block' }}>Избранные</span>
+        <span style={{ display: 'block' }}>Chosen</span>
         <select name="isChosen" ref={register}>
           <option value="true">Да</option>
           <option value="false">Нет</option>
@@ -139,7 +143,7 @@ export default function Form({ contactObj }) {
       </label>
       {contactObj ? (
         <button className={s.btn} type="submit">
-          save changes
+          Save changes
         </button>
       ) : (
         <button type="submit" className={s.btn}>

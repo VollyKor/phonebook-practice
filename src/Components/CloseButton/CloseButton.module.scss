@@ -1,0 +1,24 @@
+.btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  fill: var(--primary-color-text);
+  background-color: black;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus {
+    fill: var(--primary-color);
+    background-color: var(--primary-color-text);
+  }
+}

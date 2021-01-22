@@ -1,17 +1,10 @@
 import { AiFillCloseCircle } from 'react-icons/ai';
+import s from './CloseButton.module.scss';
 
 export default function CloseButton({ onClose }) {
   return (
-    <button
-      aria-label="close-button"
-      onClick={onClose}
-      style={{
-        backgroundColor: 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-      }}
-    >
-      <AiFillCloseCircle style={{ width: '20px', height: '20px' }} />
+    <button aria-label="close-button" onClick={onClose} className={s.btn}>
+      <AiFillCloseCircle className={s.icon} />
     </button>
   );
 }
