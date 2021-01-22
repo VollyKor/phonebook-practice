@@ -1,19 +1,42 @@
-@import "../../Sass/utility/variables";
-
 .wrapper {
-  background-color: $divider-color;
+  background-color: var(--divider-color);
+  max-width: 100%;
   padding: 30px;
 }
 .title {
-  text-align: center;
+  text-align: left;
   margin: 0;
 }
-
+.background {
+  min-height: 300px;
+  background-image: url("../../images/book-159880.svg");
+  background-position: 90%;
+  background-size: contain;
+  background-clip: content-box;
+  background-repeat: no-repeat;
+}
 .thumb {
+  margin-top: 200px;
+  background-image: linear-gradient(
+    to right,
+    rgb(217, 122, 20),
+    rgb(220, 134, 41),
+    rgb(224, 146, 63),
+    rgb(227, 158, 84),
+    rgb(231, 170, 105),
+    rgb(234, 182, 127),
+    rgb(238, 195, 148),
+    rgb(241, 207, 170),
+    rgb(245, 219, 191),
+    rgb(248, 231, 212),
+    rgb(252, 243, 234),
+    rgb(255, 255, 255)
+  );
+  border: 3px solid var(--primary-color);
+  top: 90%;
   max-width: 400px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $primary-color;
 }

@@ -1,14 +1,14 @@
 @import "../../Sass/utility/variables";
 
 .header {
-  background-color: $primary-color;
+  background-color: var(--primary-color-dark);
 }
 .list {
   display: flex;
   list-style: none;
   padding: 0;
   padding: 10px;
-  color: $primary-color-text;
+  color: var(--primary-color-text);
 }
 .item {
   &:not(:last-child) {
@@ -22,14 +22,14 @@
   position: relative;
   text-decoration: none;
   font-weight: 700;
-  color: $primary-color-text;
+  color: var(--primary-color-text);
   &:hover {
-    color: $primary-text-color;
+    color: var(--primary-text-color);
   }
 }
 
 a.link.active {
-  color: $primary-text-color;
+  color: var(--primary-text-color);
   background-color: white;
   border-radius: 5px;
   // &::after {

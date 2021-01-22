@@ -12,17 +12,17 @@ export default function NavBar() {
               className={s.link}
               activeClassName={s.active}
             >
-              Телефонная книга
+              Phonebook
             </NavLink>
           </li>
           <li className={s.item}>
             <NavLink to="/notes" className={s.link} activeClassName={s.active}>
-              Заметки
+              Notes
             </NavLink>
           </li>
           <li className={s.item}>
             <NavLink to="/" className={s.link} activeClassName={s.active} exact>
-              Что-то еще
+              Todos
             </NavLink>
           </li>
         </ul>

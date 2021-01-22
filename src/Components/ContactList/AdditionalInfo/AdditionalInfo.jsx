@@ -1,4 +1,4 @@
-import { BsFillStarFill } from 'react-icons/bs';
+import s from './AdditionalInfo.module.scss';
 
 export default function AdditionalInfo({ contactObj, hide }) {
   const { email, isChosen } = contactObj;
@@ -14,22 +14,16 @@ export default function AdditionalInfo({ contactObj, hide }) {
 
   return (
     <div
-      style={{
-        position: 'absolute',
-        top: '100%',
-        left: '0%',
-        width: '100%',
-        zIndex: '1',
-        backgroundColor: 'white',
-        border: '1px solid black',
-      }}
+      className={s.wrapper}
       //   {isChosen === 'true' && className=}
     >
-      <p>Email {email}</p>
-      <button onClick={hide}>Hide</button>
-      <button type="button" onClick={() => console.log('change isChosen')}>
-        <BsFillStarFill color={isChosen === true ? 'gold' : 'grey'} />
+      <p className={s.text}>
+        Email : <span className={s.email}>{email}</span>
+      </p>
+      <button className={s.hideBtn} onClick={hide}>
+        Hide
       </button>
+
       {/* <BsFillStarFill color="grey" />
       <BsFillStarFill /> */}
     </div>

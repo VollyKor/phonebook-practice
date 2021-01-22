@@ -3,6 +3,8 @@ import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import context from '../../../context/contactsCtx';
+import s from './ContactItem.module.scss';
+import { BsFillStarFill } from 'react-icons/bs';
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -12,15 +14,15 @@ export default function ContactItem({ contactObj }) {
   const { firstName, lastName, phoneNumber, email, isChosen, id } = contactObj;
   return (
     <>
-      <p className="text-center">
-        <span className="card-title">{` ${firstName} ${lastName} `}</span>
-        <span className="card-subtitle text-muted">{phoneNumber}</span>
+      <p className={s.item}>
+        <span className={s.itemName}>{` ${firstName} ${lastName} `}</span>
+        <span className={s.itemPhoneNumber}>{phoneNumber}</span>
       </p>
 
-      <div className="d-flex">
+      <div className={`flex-box ${s.btnList}`}>
         <button
           type="button"
-          className="btn btn-sm btn-secondary mx-auto"
+          className={s.btn}
           onClick={() => {
             setShowAddInfo(true);
           }}
@@ -30,7 +32,7 @@ export default function ContactItem({ contactObj }) {
 
         <button
           type="button"
-          className="btn btn-sm btn-secondary mx-auto"
+          className={s.btn}
           onClick={() => {
             setIsModalVisible(true);
           }}
@@ -40,13 +42,17 @@ export default function ContactItem({ contactObj }) {
 
         <button
           type="button"
-          className="btn btn-sm btn-secondary mx-auto"
+          className={s.btn}
           onClick={() => {
             removeContact(id);
           }}
         >
           Delete Contact
         </button>
+        <BsFillStarFill
+          className={s.chosenIcon}
+          color={isChosen === true ? 'gold' : 'transparent'}
+        />
       </div>
 
       {showAddInfo && (

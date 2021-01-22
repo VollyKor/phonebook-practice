@@ -4,15 +4,24 @@
   display: block;
   padding: 5px 10px;
   border-radius: 5px;
+  border-color: var(--primary-color);
+  outline: none;
+
+  &:hover,
+  &:focus {
+    border-color: var(--primary-text-color);
+    outline: none;
+    // box-shadow: ;
+  }
 }
 
 .label {
   display: flex;
   align-items: center;
-  color: $primary-color-text;
+  color: var(--primary-text-color);
   padding: 10px;
 }
 
 .label > span {
-  margin-right: 10px;
+  margin-right: 30px;
 }
