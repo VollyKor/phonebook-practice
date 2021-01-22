@@ -4,11 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 import Form from './Components/Form/Form';
 import NavBar from './Components/NavBar/NavBar';
 import Modal from './Components/Modal/Modal';
-import CloseButton from './Components/CloseButton/CloseButton';
 import Phonebook from './Components/Phonebook/Phonebook';
 import contactsCtx from './context/contactsCtx';
 import AddTodoForm from './Components/Todos/AddTodoForm/AddTodoForm';
 import Todos from './Components/Todos/Todos';
+import Notes from './Components/Notes/Notes';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';
@@ -146,9 +146,11 @@ function App() {
               />
             </Route>
             <Route path="/notes">
+              <Notes />
+            </Route>
+            <Route path="/" exact>
               <Todos />
             </Route>
-            <Route path="/" exact />
           </Switch>
         </main>
       </contactsCtx.Provider>

@@ -24,19 +24,6 @@
   border-radius: 3px;
 }
 
-.btn {
-  border-radius: 3px;
-  margin-left: 30px;
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: greenyellow;
-}
-
-.btn:hover {
-  cursor: pointer;
-  background-color: orange;
-}
-
 .list {
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -46,7 +33,6 @@
 
 .item {
   max-width: 100%;
-  padding: 15px;
 }
 
 .itemWrapper {
