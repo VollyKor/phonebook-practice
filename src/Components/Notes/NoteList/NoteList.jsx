@@ -1,7 +1,7 @@
 export default function NoteList() {
   return (
     <div>
-      <h2>Note list</h2>
+      <h2 hidden>Note list</h2>
       <ul>
         <li>1</li>
         <li>2</li>
