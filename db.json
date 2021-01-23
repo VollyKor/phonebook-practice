@@ -1,19 +1,34 @@
 {
-  "posts": [
+  "notes": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id": "1",
+      "title": "Выучить React Query",
+      "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti labore a magni vitae placeat, impedit aperiam voluptatibus. Hic temporibus dolor architecto, expedita cupiditate ab magni est, laborum magnam voluptate soluta?",
+      "createTime": 1611411544850
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "2",
+      "title": "Выучить Регулярные выражения",
+      "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti labore a magni vitae placeat, impedit aperiam voluptatibus. Hic temporibus dolor architecto, expedita cupiditate ab magni est, laborum magnam voluptate soluta?",
+      "createTime": 1611411544850
+    },
+    {
+      "id": "3",
+      "title": "Выучить React Native",
+      "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti labore a magni vitae placeat, impedit aperiam voluptatibus. Hic temporibus dolor architecto, expedita cupiditate ab magni est, laborum magnam voluptate soluta?",
+      "createTime": 1611411544850
+    },
+    {
+      "id": "4",
+      "title": "Выучить React Native",
+      "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti labore a magni vitae placeat, impedit aperiam voluptatibus. Hic temporibus dolor architecto, expedita cupiditate ab magni est, laborum magnam voluptate soluta?",
+      "createTime": 1611411544850
+    },
+    {
+      "title": "Какое то задание",
+      "text": "Зделать что то ",
+      "id": "29191c56-2fc1-488d-b9ca-7be0bd3e3576",
+      "createTime": 1611412425107
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
