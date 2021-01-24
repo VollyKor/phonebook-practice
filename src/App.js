@@ -129,7 +129,8 @@ function App() {
         }}
       >
         <NavBar />
-        <main className="container">
+        {/* <main className="container"> */}
+        <main>
           <Switch>
             <Route path="/phonebook">
               {isModalVisible && (

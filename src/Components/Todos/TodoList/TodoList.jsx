@@ -1,11 +1,13 @@
+import s from './TodoList.module.scss';
+
 export default function TodoList({ header, list }) {
   return (
     <>
-      <h3>{header}</h3>
+      <h2 className={s.title}>{header}</h2>
       <ul>
         {list.map(({ id, name, desc }) => (
-          <li key={id} className="card">
-            <h3>{name}</h3>
+          <li key={id} tabIndex="0" className={s.item}>
+            <h3 className={s.subtitle}>{name}</h3>
             <p>{desc}</p>
           </li>
         ))}

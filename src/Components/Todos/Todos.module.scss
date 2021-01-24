@@ -1,0 +1,26 @@
+.hero {
+  margin: 0 auto;
+  padding: 0 15px;
+  background-image: url(../../images/kanban-bckg.jpg);
+  //   background-image: url(../../images/kanban.jpg)
+  background-position: top;
+  background-size: auto;
+  background-repeat: no-repeat;
+  max-width: 1400px;
+  min-height: 400px;
+}
+.title {
+  color: var(--primary-color-text);
+  text-shadow: 7px 0px 5px #000000, -7px 0px 5px #000000, 0px 7px 5px #000000,
+    0px -7px 5px #000000, 0px -7px 5px #000000;
+  margin-top: 0;
+  font-size: 48px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 2vw;
+  list-style: none;
+  padding-left: none;
+}
