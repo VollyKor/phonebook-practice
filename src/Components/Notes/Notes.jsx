@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import s from './Notes.module.scss';
 import NoteList from './NoteList/NoteList';
+import Button from 'Components/Button/Button';
 
 const { fetchNotes, addNote } = notesOperations;
 
@@ -70,6 +71,9 @@ export default function Notes() {
             <button type="submit" className={s.btn}>
               Add Note
             </button>
+            {/* <Button type="submit" className={s.btn}>
+              Add Note
+            </Button> */}
           </form>
         </div>
         <NoteList />

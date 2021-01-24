@@ -97,10 +97,6 @@
   background-color: var(--primary-color-text);
   color: var(--primary-text-color);
 
-  &:hover {
-    cursor: pointer;
-  }
-
   &:hover,
   &:focus {
     border: 2px solid transparent;
