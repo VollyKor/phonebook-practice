@@ -23,6 +23,7 @@
 }
 
 .input {
+  display: block;
   padding-left: 10px;
   width: 100%;
   color: white;
@@ -49,7 +50,11 @@
 }
 
 .btn {
+  display: block;
   color: white;
   background-color: rgba($color: #ffffff, $alpha: 0.4);
-  margin-bottom: 15px;
+}
+
+body .react-datepicker__input-container {
+  display: block;
 }
