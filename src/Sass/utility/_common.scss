@@ -22,3 +22,8 @@ ul {
   align-items: center;
   justify-content: center;
 }
+
+body .react-datepicker__input-container,
+body .react-datepicker-wrapper {
+  display: block;
+}

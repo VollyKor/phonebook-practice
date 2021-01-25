@@ -55,6 +55,7 @@
   background-color: rgba($color: #ffffff, $alpha: 0.4);
 }
 
-body .react-datepicker__input-container {
+body .react-datepicker__input-container,
+body .react-datepicker-wrapper {
   display: block;
 }
