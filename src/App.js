@@ -104,7 +104,7 @@ function App() {
           <Route path="/phonebook">
             {isModalVisible && (
               <Modal onClose={() => setIsModalVisible(false)}>
-                <Form addContact={() => dispatch(addContact())} />
+                <Form />
               </Modal>
             )}
             <div className="container">
