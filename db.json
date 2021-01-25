@@ -30,5 +30,39 @@
       "id": "2f42970d-9621-4b8f-9196-a792edc3a304",
       "createTime": 1611488409121
     }
+  ],
+  "contacts": [
+    {
+      "id": "id-1",
+      "firstName": "Simpson",
+      "lastName": "Rosie",
+      "phoneNumber": "459-12-56",
+      "isChosen": false,
+      "email": "123@gmail.com"
+    },
+    {
+      "id": "id-2",
+      "firstName": "Kline",
+      "lastName": "Hermione",
+      "phoneNumber": "443-89-12",
+      "isChosen": true,
+      "email": "123@gmail.com"
+    },
+    {
+      "id": "id-3",
+      "firstName": "Clements",
+      "lastName": "Eden",
+      "phoneNumber": "645-17-79",
+      "isChosen": false,
+      "email": "123@gmail.com"
+    },
+    {
+      "id": "id-4",
+      "firstName": "Copeland",
+      "lastName": "Annie",
+      "phoneNumber": "227-91-26",
+      "isChosen": true,
+      "email": "123@gmail.com"
+    }
   ]
 }
