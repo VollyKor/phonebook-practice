@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { request } from 'service';
+import { fetchNotesAPI } from 'service';
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
   try {
-    const response = await request.getNotes();
+    const response = await fetchNotesAPI.getNotes();
     return response.data;
   } catch (error) {
     console.log(error);
@@ -13,7 +13,7 @@ export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
 
 export const addNote = createAsyncThunk('notes/addNote', async newNote => {
   try {
-    const response = await request.addNote(newNote);
+    const response = await fetchNotesAPI.addNote(newNote);
     console.log(response);
     return response.data;
   } catch (error) {
@@ -24,7 +24,7 @@ export const addNote = createAsyncThunk('notes/addNote', async newNote => {
 
 export const deleteNote = createAsyncThunk('notes/deleteNote', async NoteId => {
   try {
-    const response = await request.deleteNote(NoteId);
+    const response = await fetchNotesAPI.deleteNote(NoteId);
     return response;
   } catch (error) {
     console.log(error);
@@ -36,7 +36,7 @@ export const changeNote = createAsyncThunk(
   'notes/changeNote',
   async (NoteId, changedObj) => {
     try {
-      const response = await request.changeNote(NoteId, changedObj);
+      const response = await fetchNotesAPI.changeNote(NoteId, changedObj);
       return response.data;
     } catch (error) {
       console.log(error);

@@ -4,8 +4,11 @@ import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useState, useContext } from 'react';
-import ContactCtx from '../../context/contactsCtx';
+import { useState } from 'react';
+import { phonebookOperations } from 'redux/phonebook';
+import { useDispatch } from 'react-redux';
+
+const { changeContact, addContact } = phonebookOperations;
 
 //  регулярное выраженияе для фильтрации чисел
 // +3 (111) 111-11-11 ==> 31111111111
@@ -13,7 +16,8 @@ import ContactCtx from '../../context/contactsCtx';
 
 export default function Form({ contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
-  const { changeContact, addContact } = useContext(ContactCtx);
+  const dispatch = useDispatch();
+  // const { changeContact, addContact } = useContext(ContactCtx);
 
   //  Validation
   // ====================================================
@@ -54,26 +58,10 @@ export default function Form({ contactObj }) {
     };
   }
 
-  const {
-    register,
-    errors,
-    handleSubmit,
-    // reset,                                      // for reset form with default values
-    // formState: { isSubmitSuccessful },         //  for reset form with default values
-  } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     resolver: yupResolver(schema),
-    // reValidateMode: 'onSubmit',
     defaultValues: defaultValues(), //  for reset form with default values
   });
-
-  // reset Form with default values par  .№2
-  // =========================
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset({ ...defaultValues });
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isSubmitSuccessful, reset]);
 
   // Submit Form
   // ==============================================================
