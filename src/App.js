@@ -4,7 +4,6 @@ import Form from './Components/Form/Form';
 import NavBar from './Components/NavBar/NavBar';
 import Modal from './Components/Modal/Modal';
 import Phonebook from './Components/Phonebook/Phonebook';
-import contactsCtx from './context/contactsCtx';
 import Todos from './Components/Todos/Todos';
 import Notes from './Components/Notes/Notes';
 import { useDispatch, useSelector } from 'react-redux';

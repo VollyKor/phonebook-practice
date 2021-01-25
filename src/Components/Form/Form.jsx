@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState } from 'react';
-import { phonebookOperations } from 'redux/phonebook';
+import { contactsOperations } from 'redux/phonebook';
 import { useDispatch } from 'react-redux';
 
-const { changeContact, addContact } = phonebookOperations;
+const { changeContact, addContact } = contactsOperations;
 
 //  регулярное выраженияе для фильтрации чисел
 // +3 (111) 111-11-11 ==> 31111111111
@@ -17,7 +17,6 @@ const { changeContact, addContact } = phonebookOperations;
 export default function Form({ contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
   const dispatch = useDispatch();
-  // const { changeContact, addContact } = useContext(ContactCtx);
 
   //  Validation
   // ====================================================
@@ -72,7 +71,6 @@ export default function Form({ contactObj }) {
       data.id = uuidv4();
       setSubmittedData(data);
       addContact(data);
-
       e.target.reset();
       return;
     }
@@ -131,10 +129,6 @@ export default function Form({ contactObj }) {
           <span className={s.inputTitle} style={{ display: 'block' }}>
             Add to Chosen?
           </span>
-          {/* <select name="isChosen" ref={register}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select> */}
           <input type="checkbox" />
         </label>
         {contactObj ? (

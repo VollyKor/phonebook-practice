@@ -1,17 +1,20 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
-import context from '../../../context/contactsCtx';
 import s from './ContactItem.module.scss';
 import { BsFillStarFill } from 'react-icons/bs';
+import { contactsOperations } from 'redux/phonebook';
+import { useDispatch } from 'react-redux';
+
+const { deleteContact } = contactsOperations;
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAddInfo, setShowAddInfo] = useState(false);
-  const { removeContact, changeContact } = useContext(context);
+  const dispatch = useDispatch();
 
-  const { firstName, lastName, phoneNumber, email, isChosen, id } = contactObj;
+  const { firstName, lastName, phoneNumber, isChosen, id } = contactObj;
   return (
     <>
       <p className={s.item}>
@@ -43,9 +46,7 @@ export default function ContactItem({ contactObj }) {
         <button
           type="button"
           className={s.btn}
-          onClick={() => {
-            removeContact(id);
-          }}
+          onClick={() => dispatch(deleteContact(id))}
         >
           Delete Contact
         </button>
