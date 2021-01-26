@@ -1,5 +1,9 @@
 @import "../../Sass/utility/variables";
 
+.wrapper {
+  justify-content: space-between;
+}
+
 .header {
   background-color: var(--primary-color-dark);
 }
@@ -46,4 +50,50 @@ a.link.active {
   //   display: block;
   // z-index: 2;
   // }
+}
+
+body .btnLogin,
+body .btnLogout {
+  background-color: #212121;
+  color: white;
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.6);
+  border-color: #212121;
+
+  transform: scale(1);
+  transition: transform 1300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: color 1300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: white;
+    color: #212121;
+  }
+}
+
+body .btnReg {
+  margin-left: 10px;
+  border-color: white;
+
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.6);
+
+  transform: scale(1);
+  transition: transform 1300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: color 1300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #212121;
+    color: white;
+  }
+}
+
+.user {
+  margin-right: 10px;
+}
+
+.icon {
+  display: block;
+  width: 40px;
+  max-height: 100%;
+  margin-right: 10px;
 }

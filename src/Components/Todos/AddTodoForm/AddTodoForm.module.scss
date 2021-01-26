@@ -33,6 +33,7 @@
   border: 2px solid var(--primary-color-dark);
   outline: none;
 }
+
 .textarea {
   display: block;
   box-sizing: border-box;
@@ -53,9 +54,4 @@
   display: block;
   color: white;
   background-color: rgba($color: #ffffff, $alpha: 0.4);
-}
-
-body .react-datepicker__input-container,
-body .react-datepicker-wrapper {
-  display: block;
 }

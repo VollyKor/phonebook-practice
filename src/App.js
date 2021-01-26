@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { contactsSelectors, contactsOperations } from 'redux/phonebook';
+
 import Form from './Components/Form/Form';
 import NavBar from './Components/NavBar/NavBar';
 import Modal from './Components/Modal/Modal';
 import Phonebook from './Components/Phonebook/Phonebook';
 import Todos from './Components/Todos/Todos';
 import Notes from './Components/Notes/Notes';
-import { useDispatch, useSelector } from 'react-redux';
-import { contactsSelectors, contactsOperations } from 'redux/phonebook';
 
 // For id gen
 // import { v4 as uuidv4 } from 'uuid';

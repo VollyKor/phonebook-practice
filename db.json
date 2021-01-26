@@ -121,14 +121,6 @@
       "phoneNumber": "645-17-79",
       "isChosen": false,
       "email": "123@gmail.com"
-    },
-    {
-      "id": "id-4",
-      "firstName": "Copeland",
-      "lastName": "Annie",
-      "phoneNumber": "227-91-26",
-      "isChosen": true,
-      "email": "123@gmail.com"
     }
   ]
 }
