@@ -1,4 +1,4 @@
-import s from './Form.module.scss';
+import s from './AddContactForm.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsSelectors, contactsOperations } from 'redux/phonebook';
 
-import Form from './Components/Form/Form';
+import AddContactForm from './Components/Forms/AddContactForm/AddContactForm';
 import NavBar from './Components/NavBar/NavBar';
 import Modal from './Components/Modal/Modal';
 import Phonebook from './Components/Phonebook/Phonebook';
@@ -104,7 +104,7 @@ function App() {
           <Route path="/phonebook">
             {isModalVisible && (
               <Modal onClose={() => setIsModalVisible(false)}>
-                <Form />
+                <AddContactForm />
               </Modal>
             )}
             <div className="container">

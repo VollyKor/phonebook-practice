@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Form from '../../Form/Form';
+import AddContactForm from '../../Forms/AddContactForm/AddContactForm';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import s from './ContactItem.module.scss';
@@ -71,7 +71,7 @@ export default function ContactItem({ contactObj }) {
             setIsModalVisible(false);
           }}
         >
-          <Form contactObj={contactObj}></Form>
+          <AddContactForm contactObj={contactObj}></AddContactForm>
         </Modal>
       )}
     </>
