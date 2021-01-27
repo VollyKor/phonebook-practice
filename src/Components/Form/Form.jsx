@@ -18,6 +18,13 @@ export default function Form({ contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
   const dispatch = useDispatch();
 
+  //  Reaact hook Form
+  // ========================================
+  const { register, errors, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: defaultValues(), //  for reset form with default values
+  });
+
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -57,11 +64,6 @@ export default function Form({ contactObj }) {
     };
   }
 
-  const { register, errors, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: defaultValues(), //  for reset form with default values
-  });
-
   // Submit Form
   // ==============================================================
   const onSubmit = (data, e) => {
@@ -93,7 +95,7 @@ export default function Form({ contactObj }) {
             className={s.input}
             ref={register({ required: true, maxLength: 20 })}
           />
-          <p className={s.alarm}>{errors.firstName?.message}</p>
+          <p className={s.error}>{errors.firstName?.message}</p>
         </label>
 
         <label className={s.label}>
@@ -104,13 +106,13 @@ export default function Form({ contactObj }) {
             className={s.input}
             ref={register({ required: true, maxLength: 20 })}
           />
-          <p className={s.alarm}>{errors.lastName?.message}</p>
+          <p className={s.error}>{errors.lastName?.message}</p>
         </label>
 
         <label className={s.label}>
           <span className={s.inputTitle}>E-mail</span>
           <input name="email" className={s.input} ref={register} />
-          <p className={s.alarm}>{errors.email?.message}</p>
+          <p className={s.error}>{errors.email?.message}</p>
         </label>
 
         <label className={s.label}>
@@ -122,7 +124,7 @@ export default function Form({ contactObj }) {
             className={s.input}
             ref={register}
           />
-          <p className={s.alarm}>{errors.phoneNumber?.message}</p>
+          <p className={s.error}>{errors.phoneNumber?.message}</p>
         </label>
 
         <label className={s.label}>
