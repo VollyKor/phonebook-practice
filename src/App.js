@@ -51,7 +51,7 @@ function App() {
 
   // add contact to Contact List
   // =====================================
-  const addContact = newContact => {
+  const newContact = newContact => {
     if (
       contacts.some(({ firstName }) => {
         return firstName.includes(newContact.firstName);

@@ -3,8 +3,11 @@ import Button from 'Components/Button/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { authOperations } from 'redux/auth';
+import { useDispatch } from 'react-redux';
 
 export default function LogInForm() {
+  const dispatch = useDispatch();
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -27,11 +30,11 @@ export default function LogInForm() {
   });
 
   const onSubmit = (data, e) => {
-    console.log(data);
-    console.log(e);
+    dispatch(authOperations.login(data));
     e.target.reset();
     return;
   };
+
   return (
     <div className={s.formWrapper}>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>

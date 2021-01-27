@@ -3,8 +3,12 @@ import s from './SignUpForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { authOperations } from 'redux/auth';
+import { useDispatch } from 'react-redux';
 
 export default function SignUpForm() {
+  const dispatch = useDispatch();
+
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -14,7 +18,7 @@ export default function SignUpForm() {
       .max(20, 'Less then 20 chars')
       .required('Required'),
     email: yup.string().email().required('Required'),
-    userName: yup
+    name: yup
       .string()
       .min(3, 'More then 3 chars')
       .max(20, 'Less then 20 chars')
@@ -27,14 +31,13 @@ export default function SignUpForm() {
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
-      userName: '',
+      name: '',
       password: '',
     },
   });
 
   const onSubmit = (data, e) => {
-    console.log(data);
-    console.log(e);
+    dispatch(authOperations.register(data));
     e.target.reset();
     return;
   };
@@ -45,13 +48,8 @@ export default function SignUpForm() {
         <h2 className={s.title}>Sign Up</h2>
         <label className={s.label}>
           <span className={s.inputTitle}>User Name</span>
-          <input
-            ref={register}
-            name="userName"
-            className={s.input}
-            type="text"
-          />
-          <p className={s.error}>{errors.userName?.message}</p>
+          <input ref={register} name="name" className={s.input} type="text" />
+          <p className={s.error}>{errors.name?.message}</p>
         </label>
         <label className={s.label}>
           <span className={s.inputTitle}>E-mail</span>
