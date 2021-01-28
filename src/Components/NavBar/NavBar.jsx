@@ -6,12 +6,14 @@ import icon from '../../images/owl.svg';
 import Modal from 'Components/Modal/Modal';
 import LogInForm from '../Forms/LogInForm/LogInForm';
 import SignUpForm from '../Forms/SignUpForm/SIgnUpForm';
+import { authSelectors } from 'redux/auth';
+import { useSelector } from 'react-redux';
 
 export default function NavBar() {
   const [isSignInFormVisible, setIsSignInFormVisible] = useState(false);
   const [isRegisterFormVisible, setIsRegisterFormVisible] = useState(false);
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const userName = useSelector(authSelectors.getUserName);
   return (
     <header className={s.header}>
       <div className={`${s.wrapper} container flex-box`}>
@@ -51,7 +53,7 @@ export default function NavBar() {
           {isLoggedIn ? (
             <div className="flex-box">
               <img className={s.icon} src={icon} alt="icon"></img>
-              <span className={s.user}>hello {'user'}</span>
+              <span className={s.user}>hello {userName}</span>
               <Button className={s.btnLogout}>Logout</Button>
             </div>
           ) : (

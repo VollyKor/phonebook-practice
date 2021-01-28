@@ -23,7 +23,9 @@ const persistConfig = {
 
 const middleware = [
   ...getDefaultMiddleware({
-    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
   }),
   logger,
 ];

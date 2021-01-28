@@ -22,7 +22,6 @@ const {
 } = contactsOperations;
 
 function App() {
-  console.log(contactsOperations);
   const contacts = useSelector(contactsSelectors.getContacts);
   const dispatch = useDispatch();
   // const [contacts, setContacts] = useState(() => [...testContacts]);

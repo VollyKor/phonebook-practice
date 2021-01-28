@@ -13,7 +13,7 @@ const token = {
 export const register = createAsyncThunk('auth/signup', async credential => {
   try {
     const { data } = await axiosPB.post('/users/signup', credential);
-    console.log(data);
+    console.log('register data', data);
     token.set(data.token);
     return data;
   } catch (error) {
@@ -26,6 +26,7 @@ export const login = createAsyncThunk('auth/login', async credentials => {
   try {
     const { data } = await axiosPB.post('/users/login', credentials);
     token.set(data.token);
+    return data;
   } catch (error) {
     console.log(error);
     throw error;
