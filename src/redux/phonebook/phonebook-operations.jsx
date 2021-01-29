@@ -8,7 +8,6 @@ export const setContacts = createAsyncThunk(
       const response = await fetchContactsAPI.getContacts();
       return response.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   },
@@ -19,9 +18,9 @@ export const addContact = createAsyncThunk(
   async newNote => {
     try {
       const response = await fetchContactsAPI.addContact(newNote);
+      console.log(response);
       return response.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   },
@@ -34,7 +33,6 @@ export const deleteContact = createAsyncThunk(
       const response = await fetchContactsAPI.deleteContact(NoteId);
       return response;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   },
@@ -47,7 +45,6 @@ export const changeContact = createAsyncThunk(
       const response = await fetchContactsAPI.changeContact(NoteId, changedObj);
       return response.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   },

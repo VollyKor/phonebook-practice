@@ -1,10 +1,8 @@
 import s from './AddContactForm.module.scss';
-import { v4 as uuidv4 } from 'uuid';
 import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useState } from 'react';
 import { contactsOperations } from 'redux/phonebook';
 import { useDispatch } from 'react-redux';
 
@@ -15,7 +13,6 @@ const { changeContact, addContact } = contactsOperations;
 //  const unmask = value.replace(/\D/g, '');
 
 export default function Form({ contactObj }) {
-  const [submittedData, setSubmittedData] = useState({});
   const dispatch = useDispatch();
 
   //  Validation
@@ -67,17 +64,16 @@ export default function Form({ contactObj }) {
   // Submit Form
   // ==============================================================
   const onSubmit = (data, e) => {
-    // data.phoneNumber = data.phoneNumber.replace(/\D/g, '');
+    const newContact = {
+      name: data.firstName,
+      number: data.phoneNumber,
+    };
 
-    if (!contactObj) {
-      data.id = uuidv4();
-      setSubmittedData(data);
-      addContact(data);
-      e.target.reset();
-      return;
-    }
+    dispatch(addContact(newContact));
+    e.target.reset();
+    return;
 
-    changeContact(data, contactObj.id);
+    //  добавить изменение контактов
   };
 
   return (

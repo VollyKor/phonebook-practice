@@ -21,6 +21,16 @@ export default function NavBar() {
           <ul className={s.list}>
             <li className={s.item}>
               <NavLink
+                to="/"
+                className={s.link}
+                activeClassName={s.active}
+                exact
+              >
+                Main
+              </NavLink>
+            </li>
+            <li className={s.item}>
+              <NavLink
                 to="/phonebook"
                 className={s.link}
                 activeClassName={s.active}
@@ -39,7 +49,7 @@ export default function NavBar() {
             </li>
             <li className={s.item}>
               <NavLink
-                to="/"
+                to="/todos"
                 className={s.link}
                 activeClassName={s.active}
                 exact

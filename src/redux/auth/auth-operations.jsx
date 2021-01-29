@@ -13,7 +13,6 @@ const token = {
 export const register = createAsyncThunk('auth/signup', async credential => {
   try {
     const { data } = await axiosPB.post('/users/signup', credential);
-    console.log('register data', data);
     token.set(data.token);
     return data;
   } catch (error) {

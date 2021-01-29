@@ -13,10 +13,8 @@ const authReducer = createSlice({
     [authOperations.register.pending](state, _) {
       state.isLoading = true;
     },
-    [authOperations.register.fulfilled](state, payload) {
+    [authOperations.register.fulfilled](state, _) {
       state.isLoading = false;
-      //   console.log(state, payload);
-      //   console.log('записать юзера, токен, isLoggedIn');
       state.isLoggedIn = true;
     },
     [authOperations.register.rejected](_, payload) {

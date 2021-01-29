@@ -1,10 +1,8 @@
-import axios from 'axios';
-
-axios.defaults.baseURL = 'http://localhost:4040';
+import { axiosPB } from './axiosInstances';
 
 export const getContacts = async () => {
   try {
-    const response = await axios.get('/contacts');
+    const response = await axiosPB.get('/contacts');
     return response;
   } catch (error) {
     throw error;
@@ -13,7 +11,7 @@ export const getContacts = async () => {
 
 export const addContact = async contactObj => {
   try {
-    const response = await axios.post('/contacts', contactObj);
+    const response = await axiosPB.post('/contacts', contactObj);
     return response;
   } catch (error) {
     console.log(error);
@@ -22,7 +20,7 @@ export const addContact = async contactObj => {
 
 export const deleteContact = async ObjId => {
   try {
-    await axios.delete(`/contacts/${ObjId}`);
+    await axiosPB.delete(`/contacts/${ObjId}`);
     return ObjId;
   } catch (error) {
     throw error;
@@ -31,7 +29,7 @@ export const deleteContact = async ObjId => {
 
 export const changeContact = async (ObjId, changedObj) => {
   try {
-    const response = await axios.patch(`/contacts/${ObjId}`, changedObj);
+    const response = await axiosPB.patch(`/contacts/${ObjId}`, changedObj);
     console.log('patch response', response);
     return response.data;
   } catch (error) {
