@@ -18,13 +18,6 @@ export default function Form({ contactObj }) {
   const [submittedData, setSubmittedData] = useState({});
   const dispatch = useDispatch();
 
-  //  Reaact hook Form
-  // ========================================
-  const { register, errors, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: defaultValues(), //  for reset form with default values
-  });
-
   //  Validation
   // ====================================================
   const schema = yup.object().shape({
@@ -42,6 +35,13 @@ export default function Form({ contactObj }) {
       })
       .required(),
     email: yup.string().email().required(),
+  });
+
+  //  Reaact hook Form
+  // ========================================
+  const { register, errors, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: defaultValues(), //  for reset form with default values
   });
 
   // react hook form with default values part №1
