@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import AddContactForm from '../../Forms/AddContactForm/AddContactForm';
 import Modal from '../../Modal/Modal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import s from './ContactItem.module.scss';
 // import { BsFillStarFill } from 'react-icons/bs';
 import { contactsOperations } from 'redux/phonebook';
 import { useDispatch } from 'react-redux';
+import ChangeContactForm from 'Components/Forms/ChangeContactForm/ChangeContactForm';
 
-const { deleteContact } = contactsOperations;
+const { deleteContact, changeContact } = contactsOperations;
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -74,7 +74,12 @@ export default function ContactItem({ contactObj }) {
             setIsModalVisible(false);
           }}
         >
-          <AddContactForm contactObj={contactObj}></AddContactForm>
+          <ChangeContactForm
+            onClose={() => {
+              setIsModalVisible(false);
+            }}
+            contactObj={contactObj}
+          />
         </Modal>
       )}
     </>

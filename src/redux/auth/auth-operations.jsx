@@ -41,3 +41,16 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     throw error;
   }
 });
+
+export const getUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
+
+    const user = await axiosPB.get('/users/current');
+    console.log(user);
+    return user.data;
+  } catch (error) {
+    throw error;
+  }
+});

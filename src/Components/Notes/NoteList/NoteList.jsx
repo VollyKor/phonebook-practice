@@ -14,7 +14,7 @@ export default function NoteList() {
   };
 
   return (
-    <div className={s.wrapper}>
+    <div className={`container ${s.wrapper}`}>
       <h2 hidden>Note list</h2>
       <ul className={s.list}>
         {notes.map(e => (

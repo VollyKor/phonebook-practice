@@ -1,19 +1,17 @@
-import Button from 'Components/Button/Button';
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import s from './NavBar.module.scss';
 import icon from '../../images/owl.svg';
-import Modal from 'Components/Modal/Modal';
-import LogInForm from '../Forms/LogInForm/LogInForm';
-import SignUpForm from '../Forms/SignUpForm/SIgnUpForm';
-import { authSelectors } from 'redux/auth';
-import { useSelector } from 'react-redux';
+
+import { Link, NavLink } from 'react-router-dom';
+import { authOperations, authSelectors } from 'redux/auth';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Button from 'Components/Button/Button';
 
 export default function NavBar() {
-  const [isSignInFormVisible, setIsSignInFormVisible] = useState(false);
-  const [isRegisterFormVisible, setIsRegisterFormVisible] = useState(false);
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const userName = useSelector(authSelectors.getUserName);
+
   return (
     <header className={s.header}>
       <div className={`${s.wrapper} container flex-box`}>
@@ -29,15 +27,7 @@ export default function NavBar() {
                 Main
               </NavLink>
             </li>
-            <li className={s.item}>
-              <NavLink
-                to="/phonebook"
-                className={s.link}
-                activeClassName={s.active}
-              >
-                Phonebook
-              </NavLink>
-            </li>
+
             <li className={s.item}>
               <NavLink
                 to="/notes"
@@ -47,16 +37,30 @@ export default function NavBar() {
                 Notes
               </NavLink>
             </li>
-            <li className={s.item}>
-              <NavLink
-                to="/todos"
-                className={s.link}
-                activeClassName={s.active}
-                exact
-              >
-                Todos
-              </NavLink>
-            </li>
+
+            {isLoggedIn && (
+              <>
+                <li className={s.item}>
+                  <NavLink
+                    to="/phonebook"
+                    className={s.link}
+                    activeClassName={s.active}
+                  >
+                    Phonebook
+                  </NavLink>
+                </li>
+                <li className={s.item}>
+                  <NavLink
+                    to="/todos"
+                    className={s.link}
+                    activeClassName={s.active}
+                    exact
+                  >
+                    Todos
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
         <div className={s.authWrapper}>
@@ -64,38 +68,25 @@ export default function NavBar() {
             <div className="flex-box">
               <img className={s.icon} src={icon} alt="icon"></img>
               <span className={s.user}>hello {userName}</span>
-              <Button className={s.btnLogout}>Logout</Button>
+              <Button
+                className={s.btnLogout}
+                onClick={() => dispatch(authOperations.logout())}
+              >
+                Logout
+              </Button>
             </div>
           ) : (
             <>
-              <Button
-                className={s.btnLogin}
-                onClick={() => setIsSignInFormVisible(true)}
-              >
+              <Link to="/login" className={s.btnLogin}>
                 LOG IN
-              </Button>
-              <Button
-                className={s.btnReg}
-                onClick={() => setIsRegisterFormVisible(true)}
-              >
+              </Link>
+              <Link to="/register" className={s.btnReg}>
                 SIGN UP
-              </Button>
+              </Link>
             </>
           )}
         </div>
       </div>
-
-      {isRegisterFormVisible && (
-        <Modal onClose={() => setIsRegisterFormVisible(false)}>
-          <SignUpForm />
-        </Modal>
-      )}
-
-      {isSignInFormVisible && (
-        <Modal onClose={() => setIsSignInFormVisible(false)}>
-          <LogInForm />
-        </Modal>
-      )}
     </header>
   );
 }

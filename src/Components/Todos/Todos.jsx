@@ -3,8 +3,8 @@ import TodoList from './TodoList/TodoList';
 import s from './Todos.module.scss';
 import { TestTodo, TestDoing, TestDone } from '../../service/testTodos';
 
-import { Link, Route } from 'react-router-dom';
-import ClockContainer from './ClockContainer/ClockContainer';
+// import { Link, Route } from 'react-router-dom';
+// import ClockContainer from './ClockContainer/ClockContainer';
 
 export default function Todos() {
   return (

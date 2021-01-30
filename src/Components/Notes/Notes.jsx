@@ -45,36 +45,38 @@ export default function Notes() {
     <>
       <main>
         <div className={s.hero}>
-          <h1 className={s.title}>Notes for Every day</h1>
-          <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-            <label className={s.label}>
-              <span className={s.span}>Name</span>
-              <input
-                ref={register}
-                name="title"
-                className={s.nameInput}
-                type="text"
-                autoComplete="off"
-              />
-              <p className={s.alarm}>{errors.title?.message}</p>
-            </label>
-            <label className={s.label}>
-              <span className={s.span}>Write some notes</span>
-              <textarea
-                ref={register}
-                name="text"
-                className={s.textField}
-                type="text"
-              />
-              <p className={s.alarm}>{errors.text?.message}</p>
-            </label>
-            <button type="submit" className={s.btn}>
-              Add Note
-            </button>
-            {/* <Button type="submit" className={s.btn}>
+          <div className="container">
+            <h1 className={s.title}>Notes for Every day</h1>
+            <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+              <label className={s.label}>
+                <span className={s.span}>Name</span>
+                <input
+                  ref={register}
+                  name="title"
+                  className={s.nameInput}
+                  type="text"
+                  autoComplete="off"
+                />
+                <p className={s.alarm}>{errors.title?.message}</p>
+              </label>
+              <label className={s.label}>
+                <span className={s.span}>Write some notes</span>
+                <textarea
+                  ref={register}
+                  name="text"
+                  className={s.textField}
+                  type="text"
+                />
+                <p className={s.alarm}>{errors.text?.message}</p>
+              </label>
+              <button type="submit" className={s.btn}>
+                Add Note
+              </button>
+              {/* <Button type="submit" className={s.btn}>
               Add Note
             </Button> */}
-          </form>
+            </form>
+          </div>
         </div>
         <NoteList />
       </main>

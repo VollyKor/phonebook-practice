@@ -1,6 +1,5 @@
 import { combineReducers, createReducer } from '@reduxjs/toolkit';
 import { contactsOperations } from 'redux/phonebook';
-
 const {
   setContacts,
   addContact,
@@ -12,8 +11,7 @@ const ContactListReducer = createReducer([], {
   [setContacts.fulfilled]: (_, { payload }) => payload,
 
   [addContact.fulfilled]: (state, { payload }) => {
-    console.log(payload);
-    return [...state, payload];
+    return [payload, ...state];
   },
 
   [deleteContact.fulfilled]: (state, { payload }) => {

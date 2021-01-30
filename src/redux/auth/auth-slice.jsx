@@ -10,6 +10,8 @@ const authReducer = createSlice({
     isLoading: false,
   },
   extraReducers: {
+    // Register
+    // ============================================
     [authOperations.register.pending](state, _) {
       state.isLoading = true;
     },
@@ -21,6 +23,8 @@ const authReducer = createSlice({
       console.log('error', payload);
     },
 
+    // Login
+    // =======================================
     [authOperations.login.pending](state, _) {
       state.isLoading = true;
     },
@@ -34,6 +38,8 @@ const authReducer = createSlice({
       console.log('error', payload);
     },
 
+    // Logout
+    // ================================================
     [authOperations.logout.pending]({ isLoading }, _) {
       isLoading = true;
     },
@@ -44,6 +50,20 @@ const authReducer = createSlice({
       state.isLoggedIn = false;
     },
     [authOperations.logout.rejected](_, payload) {
+      console.log('error', payload);
+    },
+
+    // Refresh / getUser
+    // =======================================================
+    [authOperations.getUser.pending]({ isLoading }, _) {
+      isLoading = true;
+    },
+
+    [authOperations.getUser.fulfilled](state, { payload }) {
+      state.user = payload;
+      state.isLoggedIn = true;
+    },
+    [authOperations.getUser.rejected](_, payload) {
       console.log('error', payload);
     },
   },
