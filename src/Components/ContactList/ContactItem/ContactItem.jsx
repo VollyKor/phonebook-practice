@@ -7,7 +7,7 @@ import { contactsOperations } from 'redux/phonebook';
 import { useDispatch } from 'react-redux';
 import ChangeContactForm from 'Components/Forms/ChangeContactForm/ChangeContactForm';
 
-const { deleteContact, changeContact } = contactsOperations;
+const { deleteContact } = contactsOperations;
 
 export default function ContactItem({ contactObj }) {
   const [isModalVisible, setIsModalVisible] = useState(false);

@@ -12,7 +12,7 @@ const { changeContact, addContact } = contactsOperations;
 // +3 (111) 111-11-11 ==> 31111111111
 //  const unmask = value.replace(/\D/g, '');
 
-export default function Form({ contactObj }) {
+export default function Form({ contactObj, onClose }) {
   const dispatch = useDispatch();
 
   //  Validation
@@ -71,6 +71,7 @@ export default function Form({ contactObj }) {
 
     dispatch(addContact(newContact));
     e.target.reset();
+    onClose();
     return;
 
     //  добавить изменение контактов

@@ -3,6 +3,7 @@ import icon from '../../images/owl.svg';
 
 import { Link, NavLink } from 'react-router-dom';
 import { authOperations, authSelectors } from 'redux/auth';
+import { contactsOperations } from 'redux/phonebook';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'Components/Button/Button';
@@ -70,7 +71,10 @@ export default function NavBar() {
               <span className={s.user}>hello {userName}</span>
               <Button
                 className={s.btnLogout}
-                onClick={() => dispatch(authOperations.logout())}
+                onClick={() => {
+                  dispatch(authOperations.logout());
+                  dispatch(contactsOperations.setContacts([]));
+                }}
               >
                 Logout
               </Button>

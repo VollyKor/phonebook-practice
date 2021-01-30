@@ -6,7 +6,7 @@ const token = {
     axiosPB.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axiosPB.defaults.headers.common.Authorization = '';
+    axiosPB.defaults.headers.common.Authorization = null;
   },
 };
 
@@ -45,10 +45,14 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 export const getUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
-    token.set(state.auth.token);
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return;
+    }
+    token.set(persistedToken);
 
     const user = await axiosPB.get('/users/current');
-    console.log(user);
     return user.data;
   } catch (error) {
     throw error;

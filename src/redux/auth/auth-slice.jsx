@@ -5,9 +5,10 @@ const authReducer = createSlice({
   name: 'auth',
   initialState: {
     user: { name: null, email: null },
-    token: '',
+    token: null,
     isLoggedIn: false,
     isLoading: false,
+    isFetching: false,
   },
   extraReducers: {
     // Register
@@ -15,11 +16,13 @@ const authReducer = createSlice({
     [authOperations.register.pending](state, _) {
       state.isLoading = true;
     },
-    [authOperations.register.fulfilled](state, _) {
+    [authOperations.register.fulfilled](state, { payload }) {
       state.isLoading = false;
       state.isLoggedIn = true;
+      state.user = payload.user;
+      state.token = payload.token;
     },
-    [authOperations.register.rejected](_, payload) {
+    [authOperations.register.rejected](_, { payload }) {
       console.log('error', payload);
     },
 
@@ -55,15 +58,23 @@ const authReducer = createSlice({
 
     // Refresh / getUser
     // =======================================================
-    [authOperations.getUser.pending]({ isLoading }, _) {
-      isLoading = true;
+
+    [authOperations.getUser.pending](state, _) {
+      state.isFetching = true;
+      state.isLoading = true;
     },
 
     [authOperations.getUser.fulfilled](state, { payload }) {
-      state.user = payload;
+      state.isLoading = false;
+      state.isFetching = false;
+      if (payload !== undefined) {
+        state.user = payload;
+      }
       state.isLoggedIn = true;
     },
-    [authOperations.getUser.rejected](_, payload) {
+    [authOperations.getUser.rejected](state, { payload }) {
+      state.isFetching = false;
+      state.isLoading = false;
       console.log('error', payload);
     },
   },
