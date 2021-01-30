@@ -8,7 +8,7 @@ const {
 } = contactsOperations;
 
 const FilterReducer = createReducer('', {
-  [contactsActions.setFilter]: (state, { payload }) => payload,
+  [contactsActions.setFilter]: (_, { payload }) => payload,
 });
 
 const ContactListReducer = createReducer([], {
